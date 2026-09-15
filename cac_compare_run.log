@@ -1,0 +1,11 @@
+﻿python.exe : [NbConvertApp] Converting notebook CAC_Compare.ipynb to notebook
+At line:4 char:1
++ & $py -m jupyter nbconvert --to notebook --execute --inplace --Execut ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([NbConvertApp] ...ynb to notebook:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+C:\Users\st_1o\anaconda3\Lib\site-packages\zmq\_future.py:718: RuntimeWarning: Proactor event loop does not implement a
+dd_reader family of methods required for zmq. Registering an additional selector thread for add_reader support via torn
+ado. Use `asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())` to avoid this warning.
+  self._get_loop()

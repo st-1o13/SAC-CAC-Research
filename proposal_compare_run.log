@@ -1,0 +1,242 @@
+﻿python.exe : [NbConvertApp] Converting notebook Proposal_Compare.ipynb to notebook
+At line:4 char:1
++ & $py -m jupyter nbconvert --to notebook --execute --inplace --Execut ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([NbConvertApp] ...ynb to notebook:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+C:\Users\st_1o\anaconda3\Lib\site-packages\zmq\_future.py:718: RuntimeWarning: Proactor event loop does not implement a
+dd_reader family of methods required for zmq. Registering an additional selector thread for add_reader support via torn
+ado. Use `asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())` to avoid this warning.
+  self._get_loop()
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) i
+s sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned C
+urveZMQ keys to enable transport encryption.
+Traceback (most recent call last):
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\jupyter_core\utils\__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\st_1o\anaconda3\Scripts\jupyter-nbconvert-script.py", line 10, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\jupyter_core\application.py", line 284, in launch_instance
+    super().launch_instance(argv=argv, **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\traitlets\config\application.py", line 1075, in launch_instance
+    app.start()
+    ~~~~~~~~~^^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\nbconvert\nbconvertapp.py", line 420, in start
+    self.convert_notebooks()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\nbconvert\nbconvertapp.py", line 597, in convert_notebooks
+    self.convert_single_notebook(notebook_filename)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\nbconvert\nbconvertapp.py", line 563, in convert_single_notebook
+    output, resources = self.export_single_notebook(
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        notebook_filename, resources, input_buffer=input_buffer
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\nbconvert\nbconvertapp.py", line 487, in export_single_notebook
+    output, resources = self.exporter.from_filename(
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        notebook_filename, resources=resources
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\nbconvert\exporters\exporter.py", line 201, in from_filename
+    return self.from_file(f, resources=resources, **kw)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\nbconvert\exporters\exporter.py", line 220, in from_file
+    return self.from_notebook_node(
+           ~~~~~~~~~~~~~~~~~~~~~~~^
+        nbformat.read(file_stream, as_version=4), resources=resources, **kw
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\nbconvert\exporters\notebook.py", line 36, in from_notebook_node
+    nb_copy, resources = super().from_notebook_node(nb, resources, **kw)
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\nbconvert\exporters\exporter.py", line 154, in from_notebook_node
+    nb_copy, resources = self._preprocess(nb_copy, resources)
+                         ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\nbconvert\exporters\exporter.py", line 353, in _preprocess
+    nbc, resc = preprocessor(nbc, resc)
+                ~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\nbconvert\preprocessors\base.py", line 48, in __call__
+    return self.preprocess(nb, resources)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\nbconvert\preprocessors\execute.py", line 103, in preprocess
+    self.preprocess_cell(cell, resources, index)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\nbconvert\preprocessors\execute.py", line 124, in preprocess_cell
+    cell = self.execute_cell(cell, index, store_history=True)
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\jupyter_core\utils\__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\st_1o\anaconda3\Lib\asyncio\base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\nbclient\client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\st_1o\anaconda3\Lib\site-packages\nbclient\client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import torch
+
+agent.actor_net.load_state_dict(torch.load("policy_ep200.pth"))
+agent.actor_net.eval()
+print(">>> actor_safe_only.pth をロードしました。安全制御のみのアクターでシミュレーション開始 <<<")
+
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+import os
+
+# --- シミュレーション（既存コードを想定） ---
+env = gym.make(gym_name, render_mode='rgb_array')
+env.action_space.seed(seed)
+
+frames = []
+# Gym のバージョン差に対応して reset の戻り値を扱う
+reset_ret = env.reset()
+if isinstance(reset_ret, tuple) and len(reset_ret) >= 1:
+    state = reset_ret[0]
+else:
+    state = reset_ret
+
+obs_list = []
+done = False
+
+for step in range(200):
+    # action の取得（agent の実装に依存）
+    action = agent.select_action(state, evaluate=True)
+    step_ret = env.step(action)
+    # Gym のバージョン差に対応して unpack
+    if len(step_ret) == 5:
+        next_state, reward, terminated, truncated, info = step_ret
+    else:
+        # 古いバージョン: (next_state, reward, done, info)
+        next_state, reward, done_flag, info = step_ret
+        terminated = done_flag
+        truncated = False
+
+    if terminated or truncated:
+        done = True
+
+    obs_list.append(next_state)
+
+    # render は render_mode='rgb_array' のとき配列を返す
+    try:
+        frame = env.render()
+        frames.append(frame)
+    except Exception:
+        # render が使えない環境でも続行
+        pass
+
+    state = next_state
+    if done:
+        print(f"Episode ended at step={step}")
+        break
+
+env.close()
+
+print("Collected observations:", len(obs_list))
+if len(obs_list) > 0:
+    print("Sample obs[0]:", np.asarray(obs_list[0]).shape, np.asarray(obs_list[0]))
+
+# --- 観測から cos, sin, theta_dot を抽出（堅牢処理） ---
+cos_list = []
+sin_list = []
+thetadot_list = []
+
+for obs in obs_list:
+    obs = np.asarray(obs, dtype=float).ravel()
+    # デフォルト値
+    cos_theta = 0.0; sin_theta = 0.0; theta_dot = 0.0
+
+    if obs.size >= 3:
+        cos_theta = obs[0]
+        sin_theta = obs[1]
+        theta_dot = obs[2]
+    elif obs.size == 2:
+        theta = obs[0]
+        theta_dot = obs[1]
+        cos_theta = math.cos(theta)
+        sin_theta = math.sin(theta)
+    elif obs.size == 1:
+        theta = obs[0]
+        cos_theta = math.cos(theta)
+        sin_theta = math.sin(theta)
+        theta_dot = 0.0
+
+    # 正規化（数値誤差対策）
+    norm_cs = math.hypot(cos_theta, sin_theta)
+    if norm_cs > 1e-6:
+        cos_theta /= norm_cs
+        sin_theta /= norm_cs
+
+    cos_list.append(float(cos_theta))
+    sin_list.append(float(sin_theta))
+    thetadot_list.append(float(theta_dot))
+
+# --- プロット ---
+steps = np.arange(len(cos_list))
+L = len(steps)
+x_lst = [0, L]
+y_lst = [-2.0, -2.0]
+fig, axes = plt.subplots(3, 1, figsize=(10, 8), sharex=True)
+ax0, ax1, ax2 = axes
+
+ax0.plot(steps, thetadot_list, color='tab:blue')
+ax0.plot(x_lst, y_lst, linestyle='dashed', color='red', label='Safety threshold −2.0')
+ax0.set_ylabel('Angular velocity (θ̇)')
+ax0.grid(True)
+ax0.set_title('Simulation: step vs θ̇, sinθ, cosθ')
+
+ax1.plot(steps, sin_list, color='tab:orange')
+ax1.set_ylabel('sin θ')
+ax1.grid(True)
+
+ax2.plot(steps, cos_list, color='tab:green')
+ax2.set_ylabel('cos θ')
+ax2.set_xlabel('Step')
+ax2.grid(True)
+
+plt.tight_layout()
+
+# 表示（Jupyter なら表示、スクリプトならファイル保存して確認）
+try:
+    plt.show()
+except Exception:
+    pass
+
+# 画像保存（必ず保存しておく）
+out_dir = "./figs"
+os.makedirs(out_dir, exist_ok=True)
+out_path = os.path.join(out_dir, "sim_traces.png")
+fig.savefig(out_path, dpi=200, bbox_inches='tight')
+print("Saved plot to:", out_path)
+
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mNameError[39m                                 Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[24][39m[32m, line 3[39m
+[32m      1[39m [38;5;28;01mimport[39;00m torch
+[32m      2[39m 
+[32m----> [39m[32m3[39m agent.actor_net.load_state_dict(torch.load([33m"policy_ep200.pth"[39m))
+[32m      4[39m agent.actor_net.eval()
+[32m      5[39m print([33m">>> actor_safe_only.pth をロードしました。安全制御のみのアクターでシミュレーション開始 <<<"[39m)
+[32m      6[39m 
+
+[31mNameError[39m: name 'agent' is not defined
+

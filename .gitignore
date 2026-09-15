@@ -1,0 +1,22 @@
+# --- Python virtual environment (never commit) ---
+.venv/
+
+# --- Python bytecode cache ---
+__pycache__/
+*.pyc
+
+# --- Claude Code tool-internal state ---
+.claude/
+
+# --- Model checkpoints (regeneratable from seeded runs) ---
+*.pth
+
+# --- This session's temporary verification artifacts ---
+_verify_*
+runs_verify_*/
+
+# --- Legacy/unused output ---
+figs/
+
+# --- Third-party copyrighted material (CAC original paper) ---
+Certificated Actor-Critic_ Hierarchical Reinforcement Learning with Control Barrier Functions for Safe Navigation (1).pdf
