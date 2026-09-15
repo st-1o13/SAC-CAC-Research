@@ -143,7 +143,7 @@ def save_figures_for_run(run_id, save_dir="runs"):
     print(f"[SAVE] Saved ALL figures for run {run_id}")
     
 
-def run_experiment(run_id):
+def run_experiment(run_id, save_dir="runs"):
 
     print(f"\n===== RUN {run_id} START =====")
     # -----------------------------
@@ -391,7 +391,7 @@ def run_experiment(run_id):
     # そのまま run_experiment() の中に移動させる
 
     # --- 3. 1回分のデータ保存 ---
-    save_single_run(run_id)
-    save_figures_for_run(run_id)
+    save_single_run(run_id, save_dir=save_dir)
+    save_figures_for_run(run_id, save_dir=save_dir)
 
     print(f"===== RUN {run_id} END =====\n")
