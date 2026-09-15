@@ -246,6 +246,9 @@ def run_experiment(run_id):
 
         violations    = 0
         done = False
+        # episode 1でrun_seedを指定して環境の乱数Generatorを初期化し、
+        # episode 2以降はそのGeneratorの状態を継続して使用するため、
+        # 毎episodeでseedを再設定しない。
         if ep == 1:
             state, _ = env.reset(seed=run_seed)
         else:
