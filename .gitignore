@@ -20,3 +20,6 @@ figs/
 
 # --- Third-party copyrighted material (CAC original paper) ---
 Certificated Actor-Critic_ Hierarchical Reinforcement Learning with Control Barrier Functions for Safe Navigation (1).pdf
+
+# --- Diagnostic experiment outputs ---
+runs_proposal_ver1_diag*/
